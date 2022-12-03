@@ -62,8 +62,9 @@ class Vampire {
   // Returns the total number of vampires that exist
   get totalDescendents() {
     let total = 0;
+    total = this.numberOfOffspring;
     for (const offspring of this.offspring) {
-      total += offspring.totalDescendents;
+      total += offspring.numberOfOffspring;
     }
 
     return total;
