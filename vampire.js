@@ -41,6 +41,21 @@ class Vampire {
     return thisVampireHasSeniority;
   }
 
+  // Returns true if this vampire is an ancestor of the other vampire.
+  isAncestor(vampire) {
+    let outcome = false;
+    let otherVampire = vampire;
+    const thisVampireName = this.name;
+    while (otherVampire.creator !== null) {
+      const otherVampireCreatorName = otherVampire.name;
+      if (otherVampireCreatorName === thisVampireName) {
+        return true;
+      }
+      otherVampire = otherVampire.creator;
+    }
+    return outcome;
+  }
+
   /** Stretch **/
 
   // Returns the closest common ancestor of two vampires.
@@ -48,8 +63,17 @@ class Vampire {
   // For example:
   // * when comparing Ansel and Sarah, Ansel is the closest common anscestor.
   // * when comparing Ansel and Andrew, Ansel is the closest common anscestor.
-  closestCommonAncestor(vampire) {
-
+  closestCommonAncestor(vampire) {   
+    
+    let thisVampire = this;
+    while (thisVampire.isAncestor(vampire) === false) {
+      if (thisVampire.creator === null) {
+        break;
+      }
+      thisVampire = thisVampire.creator;
+    }
+    return thisVampire;
+    
   }
 }
 
