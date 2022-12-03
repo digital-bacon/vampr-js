@@ -41,6 +41,55 @@ class Vampire {
     return thisVampireHasSeniority;
   }
 
+  /** Tree traversal methods **/
+
+  // Returns the vampire object with that name, or null if no vampire exists with that name
+  vampireWithName(name) {
+    // console.log('top name: ', this.name)    
+    // if (this.name === name) {
+    //   return this;
+    // }
+    // console.log(this.offspring)
+    // console.group('this.offspring loop')
+    // for (const offspring of this.offspring) {
+    //   console.count('offspring')
+    //   console.log('name: ', offspring.name) 
+    //   // if (offspring.name === name) return offspring;
+    //   offspring.vampireWithName(offspring.name);
+    // }
+    // console.groupEnd('this.offspring loop')
+    // return null;
+    if (this.name === name) {
+      return this;
+    }
+    let thisVampire;
+    for (const offspring of this.offspring) {
+      thisVampire = offspring.vampireWithName(name);
+      if (thisVampire !== null) {
+        return thisVampire;
+      }
+    }
+
+    return null;
+  }
+
+  // depthFirstTraversal() {
+  //   console.log(this.name); // 1
+  //   for (const offspring of this.offspring) {
+  //     offspring.depthFirstTraversal(); // 2
+  //   }
+  // }
+
+  // Returns the total number of vampires that exist
+  get totalDescendents() {
+    
+  }
+
+  // Returns an array of all the vampires that were converted after 1980
+  get allMillennialVampires() {
+    
+  }
+
   // Returns true if this vampire is an ancestor of the other vampire.
   isAncestor(vampire) {
     let outcome = false;
@@ -76,34 +125,28 @@ class Vampire {
     
   }
 
-  depthFirstTraversal() {
-    console.log(this.name); // 1
-    for (const offspring of this.offspring) {
-      offspring.depthFirstTraversal(); // 2
-    }
-  }
 }
 
-const rootVampire = new Vampire("root");
-const offspring1 = new Vampire("a");
-const offspring2 = new Vampire("b");
-const offspring3 = new Vampire("c");
-const offspring4 = new Vampire("d");
-const offspring5 = new Vampire("e");
-const offspring6 = new Vampire("f");
-const offspring7 = new Vampire("g");
-const offspring8 = new Vampire("h");
+// const rootVampire = new Vampire("root");
+// const offspring1 = new Vampire("a");
+// const offspring2 = new Vampire("b");
+// const offspring3 = new Vampire("c");
+// const offspring4 = new Vampire("d");
+// const offspring5 = new Vampire("e");
+// const offspring6 = new Vampire("f");
+// const offspring7 = new Vampire("g");
+// const offspring8 = new Vampire("h");
 
-rootVampire.addOffspring(offspring1);
-rootVampire.addOffspring(offspring2);
-rootVampire.addOffspring(offspring3);
-offspring3.addOffspring(offspring4);
-offspring3.addOffspring(offspring5);
-offspring5.addOffspring(offspring6);
-offspring6.addOffspring(offspring7);
-offspring2.addOffspring(offspring8);
+// rootVampire.addOffspring(offspring1);
+// rootVampire.addOffspring(offspring2);
+// rootVampire.addOffspring(offspring3);
+// offspring3.addOffspring(offspring4);
+// offspring3.addOffspring(offspring5);
+// offspring5.addOffspring(offspring6);
+// offspring6.addOffspring(offspring7);
+// offspring2.addOffspring(offspring8);
 
-console.log(rootVampire.depthFirstTraversal())
+// console.log(rootVampire.depthFirstTraversal())
 
 // Data structure outline
 /*
